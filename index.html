@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Wonders Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .slider-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            width: 100%;
+            height: 600px;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .caption h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .caption p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 10;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 70px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .thumbnail.active {
+            border-color: #2196F3;
+            transform: scale(1.05);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .slider {
+                height: 400px;
+            }
+            .thumbnail {
+                width: 80px;
+                height: 60px;
+            }
+            .caption h2 {
+                font-size: 1.5rem;
+            }
+            .caption p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=1200" alt="Machu Picchu">
+                <div class="caption">
+                    <h2>Machu Picchu, Peru</h2>
+                    <p>Ancient Incan citadel set high in the Andes Mountains</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=1200" alt="Santorini">
+                <div class="caption">
+                    <h2>Santorini, Greece</h2>
+                    <p>Stunning white-washed buildings overlooking the Aegean Sea</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200" alt="Bali">
+                <div class="caption">
+                    <h2>Bali, Indonesia</h2>
+                    <p>Tropical paradise with rich culture and beautiful beaches</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200" alt="Venice">
+                <div class="caption">
+                    <h2>Venice, Italy</h2>
+                    <p>Historic city of canals, art, and architecture</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1200" alt="Maldives">
+                <div class="caption">
+                    <h2>Maldives</h2>
+                    <p>Paradise islands with crystal clear waters and luxury resorts</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-button" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-button" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="thumbnails">
+            <div class="thumbnail active" onclick="showSlide(0)">
+                <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=200" alt="Machu Picchu Thumbnail">
+            </div>
+            <div class="thumbnail" onclick="showSlide(1)">
+                <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=200" alt="Santorini Thumbnail">
+            </div>
+            <div class="thumbnail" onclick="showSlide(2)">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=200" alt="Bali Thumbnail">
+            </div>
+            <div class="thumbnail" onclick="showSlide(3)">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=200" alt="Venice Thumbnail">
+            </div>
+            <div class="thumbnail" onclick="showSlide(4)">
+                <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=200" alt="Maldives Thumbnail">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        
+        function showSlide(index) {
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            slides[currentSlide].classList.add('active');
+            thumbnails[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Auto-advance slides every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.slider').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.querySelector('.slider').addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
